@@ -1,8 +1,7 @@
-// Función principal para calcular el crédito
 function calcularCredito() {
     let creditoSolicitado, interesAnual, plazoDeMeses;
 
-    // Pedir valores al usuario mediante prompt hasta que se ingresen valores válidos
+    // Aquí pido valores al usuario mediante prompt hasta que se ingresen valores válidos
     do {
         creditoSolicitado = parseFloat(prompt("Ingrese el monto del préstamo:"));
         interesAnual = parseFloat(prompt("Ingrese la tasa de interés anual (%):"));
@@ -13,17 +12,17 @@ function calcularCredito() {
         }
     } while (!valores(creditoSolicitado, interesAnual, plazoDeMeses));
 
-    // Calcular la tasa de interés mensual
+    // Aquí calculo la tasa de interés mensual
     const interesMensual = interesAnual / 12 / 100;
 
-    // Calcular el pago mensual usando la fórmula de pagos de un préstamo
+    // Aquí calculo el pago mensual usando la fórmula de pagos de un préstamo
     const pagoMensual = (creditoSolicitado * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazoDeMeses));
 
-    // Calcular el monto total a pagar y los intereses totales
+    // Aquí calculo el monto total a pagar y los intereses totales
     const montoTotal = pagoMensual * plazoDeMeses;
     const totalIntereses = montoTotal - creditoSolicitado;
 
-    // Mostrar los resultados en la consola
+    // Aquí muestro los resultados en la consola
     console.log(`Monto del Préstamo: $${creditoSolicitado.toFixed(2)}`);
     console.log(`Tasa de Interés Anual: ${interesAnual.toFixed(2)}%`);
     console.log(`Plazo del Préstamo: ${plazoDeMeses} meses`);
@@ -37,5 +36,5 @@ function valores(monto, interes, meses) {
     return monto > 0 && interes > 0 && meses > 0;
 }
 
-// Ejecutar la función para calcular el crédito cuando se carga la página
+// Aquí ejecuto la función para calcular el crédito cuando se carga la página
 calcularCredito();

@@ -1,3 +1,3 @@
 Alumno: Jordan Aguirre -
-Tutor: Lucas Casco -
-pre-entrega 1 (uno) del curso de JavaScript. 
+Tutor: Diana Mottura -
+pre-entrega 2 (dos) del curso de JavaScript. 

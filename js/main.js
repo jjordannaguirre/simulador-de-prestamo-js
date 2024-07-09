@@ -39,6 +39,7 @@ function calcularCredito() {
         }
 
     } while (true); // Repetir el proceso mientras el usuario quiera realizar más préstamos
+    alert("Gracias por utilizar nuestro servicio de cálculo de préstamos. ¡Hasta luego!");
 }
 
 function mostrarResultados(prestamo) {

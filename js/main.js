@@ -53,12 +53,11 @@ function mostrarResultados(prestamo) {
     `;
 
     console.log(mensaje); 
-    alert(mensaje); // Mostrar en una alerta
+    alert(mensaje); 
 }
 
 function valores(monto, interes, meses) {
     return monto > 0 && interes > 0 && meses > 0;
 }
 
-// Iniciar el proceso para calcular préstamos
 calcularCredito();

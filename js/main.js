@@ -9,10 +9,10 @@ function calcularCredito() {
             interesAnual = parseFloat(prompt("Ingrese la tasa de interés anual (%):"));
             plazoDeMeses = parseInt(prompt("Ingrese el plazo del préstamo (meses):"));
             
-            if (!valores(creditoSolicitado, interesAnual, plazoDeMeses)) {
+            if (!validarValores(creditoSolicitado, interesAnual, plazoDeMeses)) {
                 alert("Por favor, ingrese valores válidos y positivos.");
             }
-        } while (!valores(creditoSolicitado, interesAnual, plazoDeMeses));
+        } while (!validarValores(creditoSolicitado, interesAnual, plazoDeMeses));
 
         const interesMensual = interesAnual / 12 / 100;
         const pagoMensual = (creditoSolicitado * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazoDeMeses));
@@ -56,7 +56,7 @@ function mostrarResultados(prestamo) {
     alert(mensaje); 
 }
 
-function valores(monto, interes, meses) {
+function validarValores(monto, interes, meses) {
     return monto > 0 && interes > 0 && meses > 0;
 }
 

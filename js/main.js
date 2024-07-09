@@ -1,40 +1,63 @@
+let prestamos = []; // Array para almacenar múltiples préstamos
+
 function calcularCredito() {
     let creditoSolicitado, interesAnual, plazoDeMeses;
 
-    // Aquí pido valores al usuario mediante prompt hasta que se ingresen valores válidos
     do {
-        creditoSolicitado = parseFloat(prompt("Ingrese el monto del préstamo:"));
-        interesAnual = parseFloat(prompt("Ingrese la tasa de interés anual (%):"));
-        plazoDeMeses = parseInt(prompt("Ingrese el plazo del préstamo (meses):"));
-        
-        if (!valores(creditoSolicitado, interesAnual, plazoDeMeses)) {
-            alert("Por favor, ingrese valores válidos y positivos.");
+        do {
+            creditoSolicitado = parseFloat(prompt("Ingrese el monto del préstamo:"));
+            interesAnual = parseFloat(prompt("Ingrese la tasa de interés anual (%):"));
+            plazoDeMeses = parseInt(prompt("Ingrese el plazo del préstamo (meses):"));
+            
+            if (!valores(creditoSolicitado, interesAnual, plazoDeMeses)) {
+                alert("Por favor, ingrese valores válidos y positivos.");
+            }
+        } while (!valores(creditoSolicitado, interesAnual, plazoDeMeses));
+
+        const interesMensual = interesAnual / 12 / 100;
+        const pagoMensual = (creditoSolicitado * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazoDeMeses));
+        const montoTotal = pagoMensual * plazoDeMeses;
+        const totalIntereses = montoTotal - creditoSolicitado;
+
+        const nuevoPrestamo = {
+            monto: creditoSolicitado,
+            interes: interesAnual,
+            plazo: plazoDeMeses,
+            pagoMensual: pagoMensual,
+            totalIntereses: totalIntereses,
+            montoTotal: montoTotal
+        };
+
+        prestamos.push(nuevoPrestamo);
+
+        mostrarResultados(nuevoPrestamo);
+
+        // Preguntar al usuario si quiere realizar otro préstamo
+        const continuar = confirm("¿Desea realizar otro préstamo?");
+        if (!continuar) {
+            break; // Salir del bucle si no desea continuar
         }
-    } while (!valores(creditoSolicitado, interesAnual, plazoDeMeses));
 
-    // Aquí calculo la tasa de interés mensual
-    const interesMensual = interesAnual / 12 / 100;
-
-    // Aquí calculo el pago mensual usando la fórmula de pagos de un préstamo
-    const pagoMensual = (creditoSolicitado * interesMensual) / (1 - Math.pow(1 + interesMensual, -plazoDeMeses));
-
-    // Aquí calculo el monto total a pagar y los intereses totales
-    const montoTotal = pagoMensual * plazoDeMeses;
-    const totalIntereses = montoTotal - creditoSolicitado;
-
-    // Aquí muestro los resultados en la consola
-    console.log(`Monto del Préstamo: $${creditoSolicitado.toFixed(2)}`);
-    console.log(`Tasa de Interés Anual: ${interesAnual.toFixed(2)}%`);
-    console.log(`Plazo del Préstamo: ${plazoDeMeses} meses`);
-    console.log(`Pago Mensual: $${pagoMensual.toFixed(2)}`);
-    console.log(`Total de Intereses: $${totalIntereses.toFixed(2)}`);
-    console.log(`Monto Total a Pagar: $${montoTotal.toFixed(2)}`);
+    } while (true); // Repetir el proceso mientras el usuario quiera realizar más préstamos
 }
 
-// Algoritmo condicional para validar valores positivos
+function mostrarResultados(prestamo) {
+    const mensaje = `
+    Monto del Préstamo: $${prestamo.monto.toFixed(2)}
+    Tasa de Interés Anual: ${prestamo.interes.toFixed(2)}%
+    Plazo del Préstamo: ${prestamo.plazo} meses
+    Pago Mensual: $${prestamo.pagoMensual.toFixed(2)}
+    Total de Intereses: $${prestamo.totalIntereses.toFixed(2)}
+    Monto Total a Pagar: $${prestamo.montoTotal.toFixed(2)}
+    `;
+
+    console.log(mensaje); 
+    alert(mensaje); // Mostrar en una alerta
+}
+
 function valores(monto, interes, meses) {
     return monto > 0 && interes > 0 && meses > 0;
 }
 
-// Aquí ejecuto la función para calcular el crédito cuando se carga la página
+// Iniciar el proceso para calcular préstamos
 calcularCredito();
